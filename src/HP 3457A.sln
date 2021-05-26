@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP 3457A", "HP 3457A.csproj", "{B8154250-914C-49B1-9100-89CD77D80011}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8154250-914C-49B1-9100-89CD77D80011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8154250-914C-49B1-9100-89CD77D80011}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8154250-914C-49B1-9100-89CD77D80011}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8154250-914C-49B1-9100-89CD77D80011}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4EB25B30-B5E7-447E-84F6-A0230D9DD99D}
+	EndGlobalSection
+EndGlobal
