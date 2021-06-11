@@ -85,6 +85,7 @@ namespace HP_3457A
         //Lets the function know the queue has data
         bool isUserSendCommand = false;
         bool isSamplingOnly = false;
+        bool isUpdateSpeed_Changed = false;
 
         //User decides whether to save data to text file or not
         //to save output log or not
@@ -1246,7 +1247,12 @@ namespace HP_3457A
                         Process_Data.Start();
                     } while (isSamplingOnly == true & DataSampling == true);
                 }
-
+                if (isUpdateSpeed_Changed == true)
+                {
+                    isUpdateSpeed_Changed = false;
+                    insert_Log("Update Speed has been set to " + (UpdateSpeed / 1000) + " seconds.", 0);
+                    DataTimer.Interval = UpdateSpeed;
+                }
                 DataTimer.Enabled = true;
 
             }
@@ -1262,6 +1268,12 @@ namespace HP_3457A
                         insert_Log("Slow the Update Speed if warning persists.", 2);
                     }
                 }));
+                if (isUpdateSpeed_Changed == true)
+                {
+                    isUpdateSpeed_Changed = false;
+                    insert_Log("Update Speed has been set to " + (UpdateSpeed / 1000) + " seconds.", 0);
+                    DataTimer.Interval = UpdateSpeed;
+                }
                 DataTimer.Enabled = true;
             }
         }
@@ -5192,11 +5204,12 @@ namespace HP_3457A
             {
                 if (value > 0)
                 {
-                    insert_Log("Update Speed set to " + value + " seconds.", 0);
+                    insert_Log("You may need to wait for " + (UpdateSpeed / 1000) + " seconds before your new update speed takes effect.", 2);
+                    insert_Log("Update Speed set to " + value + " seconds Command Send.", 5);
                     value = value * 1000;
                     UpdateSpeed = value;
-                    DataTimer.Interval = value;
                     UpdateSpeed_Selector(0);
+                    isUpdateSpeed_Changed = true;
                 }
                 else
                 {
@@ -5211,18 +5224,20 @@ namespace HP_3457A
 
         private void UpdateSpeed_Default_Set_Button_Click(object sender, RoutedEventArgs e)
         {
+            insert_Log("You may to wait for " + (UpdateSpeed / 1000) + " seconds before your new update speed takes effect.", 2);
             UpdateSpeed = 1000;
-            insert_Log("Update Speed set to " + (UpdateSpeed / 1000) + " seconds.", 0);
-            DataTimer.Interval = UpdateSpeed;
+            insert_Log("Update Speed set to " + (UpdateSpeed / 1000) + " seconds Command Send.", 5);
             UpdateSpeed_Selector(1);
+            isUpdateSpeed_Changed = true;
         }
 
         private void UpdateSpeed_Fast_Set_Button_Click(object sender, RoutedEventArgs e)
         {
+            insert_Log("You may to wait for " + (UpdateSpeed / 1000) + " seconds before your new update speed takes effect.", 2);
             UpdateSpeed = 10;
-            insert_Log("Update Speed set to " + (UpdateSpeed / 1000) + " seconds.", 0);
-            DataTimer.Interval = UpdateSpeed;
+            insert_Log("Update Speed set to " + (UpdateSpeed / 1000) + " seconds Command Send.", 5);
             UpdateSpeed_Selector(2);
+            isUpdateSpeed_Changed = true;
         }
 
         private void UpdateSpeed_Selector(int status)
