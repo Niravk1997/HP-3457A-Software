@@ -970,6 +970,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -1013,6 +1014,13 @@
                             <Button x:Name="NPLC_100_Button" BorderThickness="0" Click="NPLC_100_Button_Click">
                                 <StackPanel Orientation="Horizontal">
                                     <Label Content="100" FontSize="16" Margin="0,-2,0,0"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                        <Border x:Name="NPLC_Query_Border" Grid.Row="0" Grid.Column="6" BorderThickness="2" BorderBrush="White" Margin="5,0,5,0">
+                            <Button x:Name="NPLC_Query_Button" BorderThickness="0" Click="NPLC_Query_Button_Click">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="NPLC?" FontSize="16" Margin="0,-2,0,0"/>
                                 </StackPanel>
                             </Button>
                         </Border>
@@ -1186,25 +1194,6 @@
                         </Border>
                     </Grid>
                 </TabItem>
-                <TabItem Header="7½ Config">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="280"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-                            <Label Content="NPLC 100 Time Delay: " Padding="0" VerticalContentAlignment="Center"/>
-                            <TextBox x:Name="NPLC_100_Delay_Time_Text" Text="12" VerticalContentAlignment="Center" MinWidth="60" MaxWidth="60"/>
-                            <Label Content="Seconds" Margin="5,0,0,0" Padding="0" VerticalContentAlignment="Center"/>
-                            <Button x:Name="NPLC_100_Time_Button" Content="Set" Margin="10,0,0,0" Padding="10,0,10,0" BorderThickness="0" Click="NPLC_100_Time_Button_Click"/>
-                        </StackPanel>
-                    </Grid>
-                </TabItem>
                 <TabItem Header="Queries">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -1345,6 +1334,30 @@
                                 <Label Content="ACBAND FAST" FontSize="16" Margin="0,-2,0,0"/>
                             </StackPanel>
                         </Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Config">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="290"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+                            <Label Content="NPLC 100 Delay (7½ Digit): " Padding="0" VerticalContentAlignment="Center"/>
+                            <TextBox x:Name="NPLC_100_Delay_Time_Text" Text="12" VerticalContentAlignment="Center" MinWidth="60" MaxWidth="60"/>
+                            <Label Content="Sec" Margin="5,0,0,0" Padding="0" VerticalContentAlignment="Center"/>
+                            <Button x:Name="NPLC_100_Time_Button" Content="Set" Margin="10,0,0,0" Padding="10,0,10,0" BorderThickness="0" Click="NPLC_100_Time_Button_Click"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+                            <Label Content="Command: " Padding="0" Margin="5,0,0,0" VerticalContentAlignment="Center"/>
+                            <TextBox x:Name="Send_SCPI_Command_Text" Text="" VerticalContentAlignment="Center" MinWidth="100" MaxWidth="100"/>
+                            <Button x:Name="Send_SCPI_Command_Button" Content="Send" Margin="10,0,0,0" Padding="10,0,10,0" BorderThickness="0" Click="Send_SCPI_Command_Button_Click"/>
+                            <Button x:Name="Query_SCPI_Command_Button" Content="Query" Margin="10,0,0,0" Padding="10,0,10,0" BorderThickness="0" Click="Query_SCPI_Command_Button_Click"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem>
             </TabControl>

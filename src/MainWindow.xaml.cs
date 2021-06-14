@@ -86,6 +86,7 @@ namespace HP_3457A
         bool isUserSendCommand = false;
         bool isSamplingOnly = false;
         bool isUpdateSpeed_Changed = false;
+        string SCPI_Command;
 
         //User decides whether to save data to text file or not
         //to save output log or not
@@ -1390,6 +1391,42 @@ namespace HP_3457A
             }
         }
 
+        private void Send_SCPI_Command_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string SCPI_Command = Send_SCPI_Command_Text.Text.Trim();
+                SerialWriteQueue.Add(SCPI_Command);
+                lockControls();
+                isUserSendCommand = true;
+                Speedup_Interval();
+                insert_Log("Write Command: " + SCPI_Command + " sent.", 3);
+            }
+            catch (Exception Ex)
+            {
+                insert_Log(Ex.Message, 1);
+                insert_Log("Something went wrong while sending write command.", 1);
+            }
+        }
+
+        private void Query_SCPI_Command_Button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SCPI_Command = Send_SCPI_Command_Text.Text.Trim();
+                SerialWriteQueue.Add("Query_Command");
+                lockControls();
+                isUserSendCommand = true;
+                Speedup_Interval();
+                insert_Log("Query Command: " + SCPI_Command + " sent.", 3);
+            }
+            catch (Exception Ex)
+            {
+                insert_Log(Ex.Message, 1);
+                insert_Log("Something went wrong while sending query command.", 1);
+            }
+        }
+
         //converts a string into a number
         private (bool, double) Text_Num(string text, bool allowNegative, bool isInteger)
         {
@@ -1731,6 +1768,7 @@ namespace HP_3457A
                     Measurement_Range = 3000000000;
                     HP3457A.WriteLine(Command);
                     break;
+                case "NPLC?":
                 case "TERM?":
                 case "ID?":
                 case "STB?":
@@ -1745,6 +1783,12 @@ namespace HP_3457A
                     Thread.Sleep(200);
                     string Message = HP3457A.ReadLine();
                     insert_Log(Message, 0);
+                    break;
+                case "Query_Command":
+                    HP3457A.WriteLine(SCPI_Command);
+                    Thread.Sleep(200);
+                    string Query_Message = HP3457A.ReadLine();
+                    insert_Log(Query_Message, 0);
                     break;
                 default:
                     HP3457A.WriteLine(Command);
@@ -4455,6 +4499,15 @@ namespace HP_3457A
             insert_Log("NPLC set to 100", 5);
             insert_Log("Resolution is 6½", 5);
             insert_Log("7½ Resolution is available to be selected from N Digit tab.", 5);
+        }
+
+        private void NPLC_Query_Button_Click(object sender, RoutedEventArgs e)
+        {
+            SerialWriteQueue.Add("NPLC?");
+            lockControls();
+            isUserSendCommand = true;
+            Speedup_Interval();
+            insert_Log("NPLC Query Command Send.", 5);
         }
 
         private string NPLC_Indicator(int Select)
