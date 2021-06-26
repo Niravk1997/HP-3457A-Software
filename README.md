@@ -3,6 +3,8 @@ This software allows you to control and log data from the HP 3457A multimeter vi
 
 #### [Download](https://github.com/Niravk1997/HP-3457A-Software/releases)
 
+#### [EEVblog forum post](https://www.eevblog.com/forum/testgear/hp-34401a-standalone-software/)
+
 #### [AR488 Adapter](https://github.com/Twilight-Logic/AR488)
 
 
